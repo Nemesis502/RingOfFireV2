@@ -1,0 +1,49 @@
+.start-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #404040;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    gap: 18px;
+
+
+
+    >img {
+        height: 50%;
+        width: 97%;
+    }
+
+    >button {
+        color: white;
+        font-family: "Grechen Fuemen";
+        font-size: 52px;
+        background-color: #ebe09b;
+        border-radius: 40px;
+
+        &:hover {
+            background-color: #aca995;
+            cursor: pointer;
+
+            filter: brightness();
+        }
+    }
+}
+
+.headline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    >h1,
+    h2 {
+        margin: 0;
+        font-size: 64px;
+        color: white;
+        font-family: "Grechen Fuemen"
+    }
+    h2{
+        font-size: 42px;
+    }
+}
