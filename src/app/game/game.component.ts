@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, collection, doc, onSnapshot, setDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, doc, onSnapshot, setDoc } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 
 
 
@@ -23,27 +22,27 @@ export class GameComponent {
   unsubGame;
 
   constructor(private firestore: Firestore, public dialog: MatDialog) {
-
-    this.unsubGame = onSnapshot(this.getGame(), (list) => {
+    this.unsubGame = onSnapshot(this.getGameRef(), (list) => {
       list.forEach(element => {
-        console.log(this.setGameObject(element.data(), element.id));
+        console.log(this.setGameObject(element.data()));
 
       })
     })
-  }
 
-  setGameObject(obj: any, id: string) {
-    return {
-      game: obj.game || "",
-    }
   }
 
   ngOnInit(): void {
     this.newGame();
+    this.addNewGame();
   }
 
   newGame() {
     this.game = new Game();
+  }
+
+  async addNewGame() {
+   let gameinfo = await addDoc(this.getGameRef(), this.game.toJson())
+   console.log(gameinfo);
   }
 
   takecard() {
@@ -79,7 +78,14 @@ export class GameComponent {
     });
   }
 
-  getGame() {
+  getGameRef() {
     return collection(this.firestore, 'games');
   }
+
+  setGameObject(obj: any) {
+      return {
+        game: obj.game || "",
+      }
+  }
 }
+
