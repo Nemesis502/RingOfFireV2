@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, addDoc, collection, doc, onSnapshot, setDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, doc, onSnapshot, setDoc, updateDoc } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -22,6 +22,7 @@ export class GameComponent {
   pickCardAnimation = false;
   currentCard: string = "";
   game!: Game;
+  gameId!: string;
   // unsubGame;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
@@ -40,37 +41,33 @@ export class GameComponent {
     this.newGame();
     this.route.params.subscribe((params) => {
       console.log(params['id']);
-      return onSnapshot(this.getGameRef(params['id']), (game) => {
+      this.gameId = params['id'];
+      return onSnapshot(this.getSingleGameRef(this.gameId), (game) => {
         let uploadedGame = this.setGameObject(game.data())
         this.game.currentPlayer = uploadedGame.currentPlayer;
         this.game.playedCards = uploadedGame.playedCard;
         this.game.players = uploadedGame.players;
         this.game.stack = uploadedGame.stack;
+        console.log(this.game);
       })
     })
-    this.addNewGame();
   }
-
-
 
   newGame() {
     this.game = new Game();
   }
 
-  async addNewGame() {
-    // await addDoc(this.getGameRef(), this.game.toJson())
-  }
 
   takecard() {
     if (!this.pickCardAnimation) {
       this.setCard();
       this.pickCardAnimation = true;
-
       this.game.currentPlayer++
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
       setTimeout(() => {
         this.game.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
+        this.saveGame();
       }, 1000);
     }
   }
@@ -86,15 +83,16 @@ export class GameComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.saveGame();
       }
     });
   }
 
-  getGameRef(params: string) {
+
+  getSingleGameRef(params: string) {
     return doc(collection(this.firestore, 'games'), params);
   }
 
@@ -105,6 +103,12 @@ export class GameComponent {
       players: obj.players || [],
       stack: obj.stack || [],
     }
+  }
+
+  async saveGame() {
+    let currentGameRef = this.getSingleGameRef(this.gameId)
+    let updateGame = this.game.toJson();
+    await updateDoc(currentGameRef, updateGame);
   }
 }
 

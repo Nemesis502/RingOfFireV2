@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { addDoc, collection, DocumentReference, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { Game } from 'src/models/game';
 
 @Component({
   selector: 'app-start-screen',
@@ -8,10 +10,24 @@ import { Router } from '@angular/router';
 })
 export class StartScreenComponent {
 
-  constructor(private router: Router){}
+  game!: Game;
+  newGameInfo!: {};
 
-  newGame(){
-    this.router.navigateByUrl('/game')
+  constructor(private firestore: Firestore, private router: Router) { }
+
+  newGame() {
+    this.game = new Game();
+    this.startNewGame();
   }
 
+  async startNewGame() {
+    await addDoc(this.getGameRef(), this.game.toJson()).then((gameinfo: DocumentReference) => {
+      console.log(gameinfo.id);
+      this.router.navigateByUrl('/game/' + gameinfo.id);
+    });
+  }
+
+  getGameRef() {
+    return collection(this.firestore, 'games');
+  }
 }
