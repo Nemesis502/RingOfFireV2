@@ -19,23 +19,17 @@ export class GameComponent {
 
   firestore: Firestore = inject(Firestore);
 
-  pickCardAnimation = false;
-  currentCard: string = "";
+
   game!: Game;
   gameId!: string;
-  // unsubGame;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
-    // this.unsubGame = ;
+
   }
 
   ngOnInit(): void {
     this.initGame()
   }
-
-  // ngonDestroy() {
-  //   this.unsubGame();
-  // }
 
   initGame() {
     this.newGame();
@@ -48,6 +42,8 @@ export class GameComponent {
         this.game.playedCards = uploadedGame.playedCard;
         this.game.players = uploadedGame.players;
         this.game.stack = uploadedGame.stack;
+        this.game.pickCardAnimation = uploadedGame.pickCardAnimation;
+        this.game.currentCard = uploadedGame.currentCard;
         console.log(this.game);
       })
     })
@@ -59,14 +55,15 @@ export class GameComponent {
 
 
   takecard() {
-    if (!this.pickCardAnimation) {
+    if (!this.game.pickCardAnimation) {
       this.setCard();
-      this.pickCardAnimation = true;
+      this.game.pickCardAnimation = true;
+      this.saveGame();
       this.game.currentPlayer++
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
-        this.pickCardAnimation = false;
+        this.game.playedCards.push(this.game.currentCard);
+        this.game.pickCardAnimation = false;
         this.saveGame();
       }, 1000);
     }
@@ -75,7 +72,7 @@ export class GameComponent {
   setCard() {
     let card = this.game.stack.pop();
     if (card != undefined) {
-      this.currentCard = card;
+      this.game.currentCard = card;
     } else {
       card
     }
@@ -102,6 +99,8 @@ export class GameComponent {
       playedCard: obj.playedCards || [],
       players: obj.players || [],
       stack: obj.stack || [],
+      pickCardAnimation: obj.pickCardAnimation || false,
+      currentCard: obj.currentCard || ""
     }
   }
 
