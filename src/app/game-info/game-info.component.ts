@@ -15,10 +15,16 @@ export class GameInfoComponent implements OnInit, OnChanges {
     { title: 'Chicks', description: 'All girls drink.' },
     { title: 'Heaven', description: 'Put your hands up! The last player drinks!' },
     { title: 'Mate', description: 'Pick a mate. Your mate must always drink when you drink and the other way around.' },
-    { title: 'Thumbmaster', description: '' },
+    { title: 'Thumbmaster', description: `The player who draws the Thumbmaster card gains the power to place their thumb on the table at any time during the game.
+      As soon as they do this, all other players must also put their thumbs on the table.
+      The last player to notice and place their thumb down has to drink.` },
     { title: 'Men', description: 'All men drink.' },
-    { title: 'Quizmaster', description: '' },
-    { title: 'Never have i ever...', description: 'Say something you nnever did. Everyone who did it has to drink.' },
+    { title: 'Quizmaster', description: `
+      The Quizmaster has the power to ask questions to other players at any time.
+      If a player answers the question, they must take a drink.
+      The trick is that players must remember not to answer any questions from the Quizmaster—they should ignore them or deflect the question. 
+      ` },
+    { title: 'Never have i ever...', description: 'Say something you never did. Everyone who did it has to drink.' },
     { title: 'Rule', description: 'Make a rule. Everyone needs to drink when he breaks the rule.' },
   ];
 

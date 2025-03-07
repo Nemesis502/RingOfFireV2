@@ -34,7 +34,6 @@ export class GameComponent {
   initGame() {
     this.newGame();
     this.route.params.subscribe((params) => {
-      console.log(params['id']);
       this.gameId = params['id'];
       return onSnapshot(this.getSingleGameRef(this.gameId), (game) => {
         let uploadedGame = this.setGameObject(game.data())
@@ -44,7 +43,6 @@ export class GameComponent {
         this.game.stack = uploadedGame.stack;
         this.game.pickCardAnimation = uploadedGame.pickCardAnimation;
         this.game.currentCard = uploadedGame.currentCard;
-        console.log(this.game);
       })
     })
   }
@@ -58,9 +56,9 @@ export class GameComponent {
     if (!this.game.pickCardAnimation) {
       this.setCard();
       this.game.pickCardAnimation = true;
-      this.saveGame();
       this.game.currentPlayer++
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      this.saveGame();
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);
         this.game.pickCardAnimation = false;

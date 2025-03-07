@@ -3,31 +3,45 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #404040;
+    background-color: #512d2d;
     width: 100vw;
     height: 100vh;
     max-width: 100%;
     gap: 18px;
 
-
-
     >img {
-        height: 50%;
+        height: 24%;
         width: 97%;
+
+        @media screen and (min-width: 471px) {
+            height: 40%;
+        }
+
+        @media screen and (min-width: 1024px) {
+            width: 70%;
+        }
     }
 
     >button {
         color: white;
         font-family: "Grechen Fuemen";
-        font-size: 52px;
-        background-color: #ebe09b;
+        font-size: 42px;
+        background-color: #724422;
         border-radius: 40px;
+        border: 2px solid black;
 
         &:hover {
             background-color: #aca995;
             cursor: pointer;
-
             filter: brightness();
+        }
+
+        @media screen and (min-width: 471px) {
+            font-size: 58px;
+        }
+
+        @media screen and (min-width: 768px) {
+            font-size: 72px;
         }
     }
 }
@@ -36,14 +50,43 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 18px;
+    text-align: center;
+
+    @media screen and (min-width: 768px) {
+        gap: 28px;
+    }
+
     >h1,
     h2 {
         margin: 0;
         font-size: 64px;
         color: white;
-        font-family: "Grechen Fuemen"
+        font-family: "Grechen Fuemen";
     }
-    h2{
-        font-size: 42px;
+
+    >h1 {
+        line-height: 52px;
+
+        @media screen and (min-width: 471px) {
+            font-size: 78px;
+        }
+
+        @media screen and (min-width: 768px) {
+            font-size: 118px;
+        }
+    }
+
+    >h2 {
+        font-size: 38px;
+
+        @media screen and (min-width: 471px) {
+            font-size: 42px;
+
+        }
+
+        @media screen and (min-width: 768px) {
+            font-size: 50px;
+        }
     }
 }
