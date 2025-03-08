@@ -1,0 +1,33 @@
+.player {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding: 0 0 0 0;
+
+    background-color: #ccc3bebf;
+
+    >span {
+        font-size: 24px;
+        color: white;
+    }
+
+    >img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 100%;
+        border: 3px solid black;
+        background-color: #ccc3be;
+    }
+}
+
+.player-active {
+    background-color: #5C4033;
+
+    >img {
+        background-color: #5C4033;
+    }
+}

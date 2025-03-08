@@ -8,6 +8,19 @@
     align-items: center;
 }
 
+.scroll-container{
+    display: flex;
+    position: absolute;
+    overflow-x: scroll;
+    left: 0;
+    right: 0;
+    top: 0;
+    
+    >app-player-mobile{
+        margin-left: 8px;
+    }
+}
+
 .card-stack {
     position: relative;
 
@@ -95,6 +108,7 @@
 .player-position {
     position: absolute;
     right: 0;
+    z-index: 1;
 }
 
 .btn-add {
