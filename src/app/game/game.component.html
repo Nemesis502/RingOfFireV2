@@ -1,8 +1,9 @@
 <app-player
   *ngFor="let player of game.players; let j = index"
-  [ngStyle]="{ 'top.px': 100 + j * 90 }"
+  [ngStyle]="{ 'top.px': 28 + j * 90 }"
   [playerActive]="j == game.currentPlayer"
-  [name]="player"
+  [name]="player.name"
+  [gender]="player.gender"
   class="player-position hide-mobile"
 ></app-player>
 <div class="scroll-container">
@@ -10,7 +11,8 @@
     class="hide-desktop"
     *ngFor="let player of game.players; let j = index"
     [playerActive]="j == game.currentPlayer"
-    [name]="player"
+    [name]="player.name"
+    [gender]="player.gender"
   ></app-player-mobile>
 </div>
 

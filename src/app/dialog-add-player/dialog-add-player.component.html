@@ -3,10 +3,19 @@
   <p>What's your name?</p>
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="name">
+    <input matInput [(ngModel)]="name" />
   </mat-form-field>
+</div>
+<div class="sex-container">
+  <h3>Gender choice</h3>
+  <mat-button-toggle-group [(ngModel)]="gender" aria-label="Favorite Color">
+    <mat-button-toggle value="man">Man</mat-button-toggle>
+    <mat-button-toggle value="woman">Woman</mat-button-toggle>
+  </mat-button-toggle-group>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
+  <button mat-button [disabled]="name.length == 0 || !gender" (click)="onSave()" cdkFocusInitial>
+    Ok
+  </button>
 </div>

@@ -78,9 +78,9 @@ export class GameComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-    dialogRef.afterClosed().subscribe((name: string) => {
-      if (name && name.length > 0) {
-        this.game.players.push(name);
+    dialogRef.afterClosed().subscribe((player: { name: string; gender: string } | undefined) => {
+      if (player && player.name && player.name.length > 0 && player.gender) {
+        this.game.players.push(player);
         this.saveGame();
       }
     });

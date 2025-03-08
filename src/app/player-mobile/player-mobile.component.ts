@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class PlayerMobileComponent {
   @Input() name!: string;
+  @Input() gender!: string;
   @Input() playerActive: boolean = false;
 }

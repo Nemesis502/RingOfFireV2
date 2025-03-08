@@ -8,15 +8,15 @@
     align-items: center;
 }
 
-.scroll-container{
+.scroll-container {
     display: flex;
     position: absolute;
-    overflow-x: scroll;
+    overflow-x: auto;
     left: 0;
     right: 0;
     top: 0;
-    
-    >app-player-mobile{
+
+    >app-player-mobile {
         margin-left: 8px;
     }
 }

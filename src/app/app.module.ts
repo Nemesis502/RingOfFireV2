@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { MatCardModule } from '@angular/material/card';
 import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 
@@ -42,6 +43,7 @@ import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
     MatInputModule,
     FormsModule,
     MatCardModule,
+    MatButtonToggleModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "ring-of-fire-c62f8", "appId": "1:1050611409904:web:9827e35ab204ddd137f335", "databaseURL": "https://ring-of-fire-c62f8-default-rtdb.europe-west1.firebasedatabase.app", "storageBucket": "ring-of-fire-c62f8.firebasestorage.app", "apiKey": "AIzaSyBjmhpxsMLaxjIjUvGNHVUwZWmUC9NjMiA", "authDomain": "ring-of-fire-c62f8.firebaseapp.com", "messagingSenderId": "1050611409904" })),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule
