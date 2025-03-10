@@ -72,6 +72,12 @@ app-player-mobile {
     }
 }
 
+.preloadImage {
+    position: absolute;
+    opacity: 0;
+    z-index: -99999;
+}
+
 .gameover-container {
     display: flex;
     justify-content: center;

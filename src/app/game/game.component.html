@@ -21,7 +21,10 @@
 <div class="gameover-container" *ngIf="gameOver">
   <img src="./assets/img/game_over.svg" alt="" />
 </div>
-
+<img class="preloadImage"
+  src="/assets/img/cards/{{ game.stack[game.stack.length - 1] }}.png"
+  alt=""
+/>
 <div *ngIf="!gameOver" class="game-field">
   <div class="card-stack">
     <img
@@ -54,8 +57,18 @@
   </div>
 </div>
 
-<app-game-info *ngIf="!gameOver" class="pin-bottom" [card]="game.currentCard"></app-game-info>
+<app-game-info
+  *ngIf="!gameOver"
+  class="pin-bottom"
+  [card]="game.currentCard"
+></app-game-info>
 
-<button *ngIf="!gameOver" mat-fab color="primary" (click)="openDialog()" class="btn-add">
+<button
+  *ngIf="!gameOver"
+  mat-fab
+  color="primary"
+  (click)="openDialog()"
+  class="btn-add"
+>
   <mat-icon>add</mat-icon>
 </button>

@@ -54,15 +54,12 @@ export class GameComponent {
   takecard() {
     if (this.game.stack.length == 0) {
       this.gameOver = true;
-    }else if (!this.game.pickCardAnimation) {
+    } else if (!this.game.pickCardAnimation) {
       this.setCard();
-      this.game.pickCardAnimation = true;
-      this.game.currentPlayer++
-      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      this.cardAnimation();
       this.saveGame();
       setTimeout(() => {
-        this.game.playedCards.push(this.game.currentCard);
-        this.game.pickCardAnimation = false;
+        this.secondCardAnimation();
         this.saveGame();
       }, 1000);
     }
@@ -75,6 +72,17 @@ export class GameComponent {
     } else {
       card
     }
+  }
+
+  cardAnimation() {
+    this.game.pickCardAnimation = true;
+    this.game.currentPlayer++
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+  }
+
+  secondCardAnimation() {
+    this.game.playedCards.push(this.game.currentCard);
+    this.game.pickCardAnimation = false;
   }
 
   editPlayer(playerId: number) {
