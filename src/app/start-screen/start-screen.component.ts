@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { addDoc, collection, DocumentReference, Firestore, onSnapshot } from '@angular/fire/firestore';
+import { addDoc, collection, DocumentReference, Firestore} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Game } from 'src/models/game';
 
@@ -22,7 +22,6 @@ export class StartScreenComponent {
 
   async startNewGame() {
     await addDoc(this.getGameRef(), this.game.toJson()).then((gameinfo: DocumentReference) => {
-      console.log(gameinfo.id);
       this.router.navigateByUrl('/game/' + gameinfo.id);
     });
   }

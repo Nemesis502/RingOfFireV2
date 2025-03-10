@@ -1,3 +1,12 @@
+app-player,
+app-player-mobile {
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(1.15);
+    }
+}
+
 .game-field {
     width: 100vw;
     height: 100vh;
@@ -63,6 +72,48 @@
     }
 }
 
+.gameover-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    >img {
+        width: 300px;
+    }
+}
+
+.player-position {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+.btn-add {
+    position: absolute;
+    right: 32px;
+    bottom: 32px;
+    background-color: #5C4033;
+
+    &:hover {
+        filter: brightness(1.5);
+    }
+}
+
+.pin-bottom {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+
+    @media screen and (min-width: 600px) {
+        bottom: 32px;
+        right: 100px;
+        left: 100px;
+    }
+
+}
+
 @media screen and (max-width: 598px) {
     @keyframes pick-card-animation {
         0% {
@@ -102,32 +153,4 @@
             transform: scale(1.3) translateX(180px) translateY(-240px) rotate(-10deg);
         }
     }
-}
-
-
-.player-position {
-    position: absolute;
-    right: 0;
-    z-index: 1;
-}
-
-.btn-add {
-    position: absolute;
-    right: 32px;
-    bottom: 32px;
-    background-color: #5C4033;
-}
-
-.pin-bottom {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    left: 0px;
-
-    @media screen and (min-width: 600px) {
-        bottom: 32px;
-        right: 100px;
-        left: 100px;
-    }
-
 }

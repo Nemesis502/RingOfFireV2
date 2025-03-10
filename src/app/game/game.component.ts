@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, addDoc, collection, doc, onSnapshot, setDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, doc, onSnapshot, updateDoc } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 
 
@@ -16,12 +17,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent {
-
   firestore: Firestore = inject(Firestore);
-
-
   game!: Game;
   gameId!: string;
+  gameOver = false;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
 
@@ -53,7 +52,9 @@ export class GameComponent {
 
 
   takecard() {
-    if (!this.game.pickCardAnimation) {
+    if (this.game.stack.length == 0) {
+      this.gameOver = true;
+    }else if (!this.game.pickCardAnimation) {
       this.setCard();
       this.game.pickCardAnimation = true;
       this.game.currentPlayer++
@@ -74,6 +75,18 @@ export class GameComponent {
     } else {
       card
     }
+  }
+
+  editPlayer(playerId: number) {
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+    dialogRef.afterClosed().subscribe((change: string) => {
+      if (change) {
+        if (change == 'Delete') {
+          this.game.players.splice(playerId, 1);
+        }
+        this.saveGame();
+      }
+    });
   }
 
   openDialog(): void {

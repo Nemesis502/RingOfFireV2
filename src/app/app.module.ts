@@ -20,6 +20,7 @@ import { GameInfoComponent } from './game-info/game-info.component';
 import { MatCardModule } from '@angular/material/card';
 import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { EditPlayerComponent } from './edit-player/edit-player.component';
 
 
 
@@ -31,7 +32,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     PlayerComponent,
     DialogAddPlayerComponent,
     GameInfoComponent,
-    PlayerMobileComponent
+    PlayerMobileComponent,
+    EditPlayerComponent
   ],
   imports: [
     BrowserModule,
